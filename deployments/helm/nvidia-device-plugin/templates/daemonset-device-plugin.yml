@@ -135,6 +135,9 @@ spec:
         name: nvidia-device-plugin-ctr
         command: ["nvidia-device-plugin"]
         env:
+        {{- if .Values.env }}
+        {{- .Values.env | toYaml | nindent 10 }}
+        {{- end }}
           - name: MPS_ROOT
             value: {{ .Values.mps.root }}
         {{- if typeIs "string" .Values.migStrategy }}
