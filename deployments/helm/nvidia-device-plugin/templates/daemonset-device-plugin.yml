@@ -137,6 +137,22 @@ spec:
         env:
           - name: MPS_ROOT
             value: {{ .Values.mps.root }}
+        {{- if typeIs "string" .Values.resourcePrefix }}
+          - name: RESOURCE_PREFIX
+            value: {{ .Values.resourcePrefix }}
+        {{- end }}
+        {{- if typeIs "string" .Values.resourceSuffix }}
+          - name: RESOURCE_SUFFIX
+            value: {{ .Values.resourceSuffix }}
+        {{- end }}
+        {{- if typeIs "string" .Values.imexChannelIds }}
+          - name: IMEX_CHANNEL_IDS
+            value: {{ .Values.imexChannelIds }}
+          {{- end }}
+        {{- if typeIs "bool" .Values.imexRequired }}
+          - name: IMEX_REQUIRED
+            value: {{ .Values.imexRequired | quote }}
+        {{- end }}
         {{- if typeIs "string" .Values.migStrategy }}
           - name: MIG_STRATEGY
             value: {{ .Values.migStrategy }}
