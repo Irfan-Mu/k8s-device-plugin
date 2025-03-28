@@ -36,6 +36,21 @@ jobs:
         run: |
           ./hack/package-helm-charts.sh ${{ github.ref_name }}
 
+      # - name: Push Helm Charts to OCI
+      #   run: |
+      #     if [ -n "${{ github.ref_name }}" ]; then
+      #       VERSION=${{ github.ref_name }}
+      #     else
+      #       VERSION=$(awk -F= '/^VERSION/ { print $2 }' versions.mk | tr -d '[:space:]')
+      #     fi
+      #     VERSION=${VERSION#v}
+
+      #     REPOSITORY=ghcr.io/$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+      #     CHART_NAME=$(yq -r .name ./deployments/helm/nvidia-device-plugin/Chart.yaml)
+      #     PACKAGE_FILE="${CHART_NAME}-${VERSION}.tgz"
+
+      #     helm push "$PACKAGE_FILE" oci://${REPOSITORY}/charts
+          
       - name: Create Draft Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
