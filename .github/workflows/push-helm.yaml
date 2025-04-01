@@ -1,13 +1,10 @@
 name: Push Chart to OCI
 
-on:
-  push:
-    branches:
-      - coreweave
+on: push
 
 jobs:
   push-helm-chart:
-    runs-on: cw
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
@@ -25,7 +22,7 @@ jobs:
         id: set_version
         run: |
           VERSION=$(grep '^VERSION' versions.mk | awk '{print $(NF)}')
-          SHORT_SHA=$(git rev-parse --short ${{ github.sha }})
+          SHORT_SHA=$(git rev-parse --short=8 ${{ github.sha }})
           VERSION="${VERSION}-${SHORT_SHA}"
           VERSION=${VERSION#v}
 

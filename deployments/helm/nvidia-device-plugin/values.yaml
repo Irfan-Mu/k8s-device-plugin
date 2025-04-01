@@ -38,6 +38,7 @@ mofedEnabled: null
 deviceDiscoveryStrategy: null
 resourcePrefix: null
 resourceSuffix: null
+dpDisableHealthchecks: null
 # Comma separated string
 imexChannelIds: null
 imexRequired: null
